@@ -34,7 +34,10 @@ export async function updateSession(request: NextRequest) {
     path.startsWith("/sign") ||
     path.startsWith("/login") ||
     path.startsWith("/auth") ||
-    path.startsWith("/api");
+    path.startsWith("/api") ||
+    path.startsWith("/icon") ||
+    path.startsWith("/apple-icon") ||
+    path.startsWith("/manifest");
 
   if (!user && !isPublic) {
     const url = request.nextUrl.clone();
