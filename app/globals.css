@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f2f4f6;
+  --surface: #ffffff;
+  --text: #191f28;
+  --text-2: #4e5968;
+  --text-3: #8b95a1;
+  --border: #eaecef;
+  --accent: #3182f6;
+  --accent-hover: #2272eb;
+  --accent-soft: #e8f1fe;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Pretendard Variable", Pretendard, ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.022em;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d6db transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #d1d6db;
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.badge {
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+}
+
+.input {
+  @apply w-full rounded-xl bg-white px-3.5 py-2.5 text-sm transition;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.input::placeholder {
+  color: #b0b8c1;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.14);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition;
+  background: var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+.btn-primary:active {
+  transform: scale(0.985);
+}
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-dark {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition;
+  background: #191f28;
+}
+.btn-dark:hover {
+  background: #333d4b;
+}
+.btn-dark:active {
+  transform: scale(0.985);
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition;
+  color: var(--text-2);
+  background: #f2f4f6;
+}
+.btn-ghost:hover {
+  background: #e8ebed;
+}
+
+.card {
+  @apply rounded-[20px] bg-white p-5;
+  border: 1px solid #f1f3f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+}
+
+.list-row {
+  @apply flex items-center gap-3 rounded-2xl px-4 py-3.5 transition;
+}
+.list-row-tap {
+  @apply cursor-pointer;
+}
+.list-row-tap:hover {
+  background: #f7f8fa;
+}
+.list-row-tap:active {
+  transform: scale(0.99);
+}
+
+.press:active {
+  transform: scale(0.985);
+}
+
+/* ── 서명 필드 오버레이 ───────────────────────────────────────── */
+.field-box {
+  @apply absolute box-border flex items-center justify-center rounded-md border-2 text-[11px] font-semibold select-none;
+}
+.field-signature { border-color: #3182f6; background: rgba(49,130,246,0.10); color: #2272eb; }
+.field-text      { border-color: #8b5cf6; background: rgba(139,92,246,0.10); color: #7c3aed; }
+.field-date      { border-color: #10b981; background: rgba(16,185,129,0.10); color: #059669; }
+.field-checkbox  { border-color: #f59e0b; background: rgba(245,158,11,0.12); color: #d97706; }
+.field-name      { border-color: #ec4899; background: rgba(236,72,153,0.10); color: #db2777; }
