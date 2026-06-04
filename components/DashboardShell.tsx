@@ -13,7 +13,7 @@ export function DashboardShell({
       <header className="sticky top-0 z-20 border-b border-[#eaecef] bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#3182f6] text-xs font-bold text-white">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1B64FF] text-xs font-bold text-white">
               S
             </span>
             <span className="text-sm font-bold text-[#191f28]">사인사인</span>

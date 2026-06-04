@@ -173,7 +173,7 @@ export function SignerView({
       </div>
 
       {/* 하단 액션 바 */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#eaecef] bg-white/95 px-5 py-3 backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#eaecef] bg-white/95 px-5 pt-3 backdrop-blur" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 0.75rem)" }}>
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="flex-1 text-xs text-[#8b95a1]">
             {error ? (

@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
+/* ── 모두싸인 스타일 디자인 토큰 ─────────────────────────────────────
+   화이트 기반 · 선명한 로열 블루 · 코퍼레이트하고 신뢰감 있는 톤 */
 :root {
-  --bg: #f2f4f6;
+  --bg: #f4f6f9;
   --surface: #ffffff;
-  --text: #191f28;
-  --text-2: #4e5968;
-  --text-3: #8b95a1;
-  --border: #eaecef;
-  --accent: #3182f6;
-  --accent-hover: #2272eb;
-  --accent-soft: #e8f1fe;
+  --text: #16181d;
+  --text-2: #4b5563;
+  --text-3: #8a94a6;
+  --border: #e5e8eb;
+  --accent: #1b64ff;
+  --accent-hover: #1450d6;
+  --accent-soft: #e8eeff;
 }
 
 html,
@@ -21,11 +23,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.011em;
+  letter-spacing: -0.014em;
 }
 
 h1, h2, h3, h4 {
-  letter-spacing: -0.022em;
+  letter-spacing: -0.028em;
 }
 
 ::selection {
@@ -52,71 +54,86 @@ h1, h2, h3, h4 {
 }
 
 .input {
-  @apply w-full rounded-xl bg-white px-3.5 py-2.5 text-sm transition;
+  @apply w-full rounded-[10px] bg-white px-3.5 py-2.5 text-sm transition;
   border: 1px solid var(--border);
   color: var(--text);
 }
 .input::placeholder {
-  color: #b0b8c1;
+  color: #aab2bd;
 }
 .input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.14);
+  box-shadow: 0 0 0 3px rgba(27, 100, 255, 0.16);
 }
 
+/* Buttons — 모두싸인풍: 살짝만 둥근(10px) 솔리드, 또렷한 블루 */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition;
+  @apply inline-flex items-center justify-center gap-1.5 rounded-[10px] px-4 py-2.5 text-sm font-bold text-white transition;
   background: var(--accent);
+  box-shadow: 0 4px 14px rgba(27, 100, 255, 0.24);
 }
 .btn-primary:hover {
   background: var(--accent-hover);
+  box-shadow: 0 4px 18px rgba(27, 100, 255, 0.3);
 }
 .btn-primary:active {
-  transform: scale(0.985);
+  transform: translateY(1px);
 }
 .btn-primary:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
 .btn-dark {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition;
-  background: #191f28;
+  @apply inline-flex items-center justify-center gap-1.5 rounded-[10px] px-4 py-2.5 text-sm font-bold text-white transition;
+  background: #16181d;
 }
 .btn-dark:hover {
-  background: #333d4b;
+  background: #2b2f37;
 }
 .btn-dark:active {
-  transform: scale(0.985);
+  transform: translateY(1px);
 }
 
 .btn-ghost {
-  @apply inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition;
+  @apply inline-flex items-center justify-center gap-1.5 rounded-[10px] px-4 py-2.5 text-sm font-bold transition;
   color: var(--text-2);
-  background: #f2f4f6;
+  background: #eef1f5;
 }
 .btn-ghost:hover {
-  background: #e8ebed;
+  background: #e3e7ee;
 }
 
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-[10px] px-4 py-2.5 text-sm font-bold transition;
+  color: var(--accent);
+  background: #fff;
+  border: 1.5px solid var(--accent);
+}
+.btn-outline:hover {
+  background: var(--accent-soft);
+}
+
+/* Card surface — 또렷한 hairline + 부드러운 그림자 */
 .card {
-  @apply rounded-[20px] bg-white p-5;
-  border: 1px solid #f1f3f5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+  @apply rounded-2xl bg-white p-5;
+  border: 1px solid #eef1f5;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.04);
 }
 
 .list-row {
-  @apply flex items-center gap-3 rounded-2xl px-4 py-3.5 transition;
+  @apply flex items-center gap-3 rounded-xl px-4 py-3.5 transition;
 }
 .list-row-tap {
   @apply cursor-pointer;
 }
 .list-row-tap:hover {
-  background: #f7f8fa;
+  background: #f5f7fa;
 }
 .list-row-tap:active {
-  transform: scale(0.99);
+  transform: scale(0.995);
 }
 
 .press:active {
@@ -127,7 +144,7 @@ h1, h2, h3, h4 {
 .field-box {
   @apply absolute box-border flex items-center justify-center rounded-md border-2 text-[11px] font-semibold select-none;
 }
-.field-signature { border-color: #3182f6; background: rgba(49,130,246,0.10); color: #2272eb; }
+.field-signature { border-color: #1b64ff; background: rgba(27,100,255,0.10); color: #1450d6; }
 .field-text      { border-color: #8b5cf6; background: rgba(139,92,246,0.10); color: #7c3aed; }
 .field-date      { border-color: #10b981; background: rgba(16,185,129,0.10); color: #059669; }
 .field-checkbox  { border-color: #f59e0b; background: rgba(245,158,11,0.12); color: #d97706; }

@@ -175,7 +175,7 @@ export function FieldEditor({
                 onClick={() => setActiveType(t)}
                 className={`rounded-xl border-2 px-2 py-2 text-xs font-semibold transition ${
                   activeType === t
-                    ? "border-[#3182f6] bg-[#e8f1fe] text-[#2272eb]"
+                    ? "border-[#1B64FF] bg-[#E8EEFF] text-[#1450D6]"
                     : "border-[#eaecef] text-[#4e5968]"
                 }`}
               >
@@ -219,7 +219,7 @@ export function FieldEditor({
                     <div
                       key={f.key}
                       onPointerDown={(e) => startDrag(e, f.key, "move")}
-                      className="field-box absolute cursor-move"
+                      className="field-box absolute cursor-move touch-none"
                       style={{
                         left: f.x * size.width,
                         top: f.y * size.height,
