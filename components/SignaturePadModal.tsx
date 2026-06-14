@@ -17,21 +17,8 @@ export function SignaturePadModal({
   const [empty, setEmpty] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const padRef = useRef<SignaturePad | null>(null);
-
-  // 캔버스를 컨테이너 크기에 맞게 DPR 보정해 리사이즈
-  const fitCanvas = () => {
-    const canvas = canvasRef.current;
-    const pad = padRef.current;
-    if (!canvas || !pad) return;
-    const ratio = Math.max(window.devicePixelRatio || 1, 1);
-    const data = pad.toData();
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
-    canvas.getContext("2d")!.scale(ratio, ratio);
-    pad.clear();
-    if (data.length) pad.fromData(data);
-    setEmpty(pad.isEmpty());
-  };
+  // 마지막으로 맞춘 캔버스 크기 — 실제 크기 변화가 없으면 다시 안 그려 그림 보존
+  const lastSizeRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
 
   useEffect(() => {
     if (tab !== "draw") return;
@@ -40,11 +27,31 @@ export function SignaturePadModal({
     const pad = new SignaturePad(canvas, { penColor: "#16181d", minWidth: 1, maxWidth: 2.6 });
     pad.addEventListener("endStroke", () => setEmpty(pad.isEmpty()));
     padRef.current = pad;
-    // 레이아웃 확정 후 핏
-    requestAnimationFrame(fitCanvas);
-    window.addEventListener("resize", fitCanvas);
+    lastSizeRef.current = { w: 0, h: 0 };
+
+    // 캔버스가 실제 크기를 가질 때(그리고 변할 때) DPR 보정해 사이징.
+    // 모바일 바텀시트는 마운트 직후 offsetWidth=0 인 순간이 있어 단발 rAF로는 0px 캔버스가 됨.
+    const fitCanvas = () => {
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      if (w === 0 || h === 0) return; // 아직 레이아웃 전 — ResizeObserver가 다시 호출
+      if (w === lastSizeRef.current.w && h === lastSizeRef.current.h) return; // 크기 동일 → 보존
+      lastSizeRef.current = { w, h };
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const data = pad.toData();
+      canvas.width = w * ratio;
+      canvas.height = h * ratio;
+      canvas.getContext("2d")!.scale(ratio, ratio);
+      pad.clear();
+      if (data.length) pad.fromData(data);
+      setEmpty(pad.isEmpty());
+    };
+
+    const ro = new ResizeObserver(fitCanvas);
+    ro.observe(canvas);
+    fitCanvas(); // 이미 크기가 잡혀 있으면 즉시
     return () => {
-      window.removeEventListener("resize", fitCanvas);
+      ro.disconnect();
       pad.off();
     };
   }, [tab]);
